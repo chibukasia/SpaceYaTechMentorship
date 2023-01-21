@@ -29,6 +29,22 @@ UIController.prototype.addBookToUI = function(book){
   <td id="delete"><i class="fa-solid fa-trash text-danger delete" style="cursor:pointer"></i></td>
  `;
  tableBody.appendChild(tr);
+ // THE ALTERNATIVE DELETE FUNCTIONALITY 
+ 
+ // First, create an instance of the UIController. This enables us to access the allerts function 
+ const ui = new UIController()
+
+ // Get the target element that you want to click, that is the td tag with the delete icon. 
+ // Remember we gave it an id of delete. We are getting the element using the delete id 
+ // We use the tr element instead of document while invoking the queryselector method 
+ const delBtn = tr.querySelector('#delete')
+ // Add a click event listener on the target, which is the delBtn that has the delete icon
+ delBtn.addEventListener('click', (e)=>{
+  // Remove the parent elements of the target
+  e.target.parentElement.parentElement.remove() 
+  // Call and invoke the alerts method once the delete operation is done; that is, the parent elements have been removd
+  ui.alerts('delete')
+ })
 };
 
 UIController.prototype.alerts = function(alertType){ 
@@ -98,9 +114,9 @@ formElement.addEventListener('submit',function(e){
 
 // Add an event listener to the table body. We will use event delegation to pass donwn the click event to the trash icon
 
-tableBody.addEventListener('click', function(e){
- const ui = new UIController();
- ui.deleteBook(e.target);
- ui.alerts('delete');
- e.preventDefault();
-})
+// tableBody.addEventListener('click', function(e){
+//  const ui = new UIController();
+//  ui.deleteBook(e.target);
+//  ui.alerts('delete');
+//  e.preventDefault();
+// })
