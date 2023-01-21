@@ -30,7 +30,7 @@ UIController.prototype.addBookToUI = function(book){
  `;
  tableBody.appendChild(tr);
  // THE ALTERNATIVE DELETE FUNCTIONALITY 
- 
+
  // First, create an instance of the UIController. This enables us to access the allerts function 
  const ui = new UIController()
 
@@ -39,12 +39,13 @@ UIController.prototype.addBookToUI = function(book){
  // We use the tr element instead of document while invoking the queryselector method 
  const delBtn = tr.querySelector('#delete')
  // Add a click event listener on the target, which is the delBtn that has the delete icon
- delBtn.addEventListener('click', (e)=>{
-  // Remove the parent elements of the target
-  e.target.parentElement.parentElement.remove() 
-  // Call and invoke the alerts method once the delete operation is done; that is, the parent elements have been removd
-  ui.alerts('delete')
- })
+//  delBtn.addEventListener('click', (e)=>{
+//   // Remove the parent elements of the target
+//   e.target.parentElement.parentElement.remove() 
+//   // Call and invoke the alerts method once the delete operation is done; that is, the parent elements have been removd
+//   ui.alerts('delete')
+//  })
+ ui.deleteBook(delBtn)
 };
 
 UIController.prototype.alerts = function(alertType){ 
@@ -72,10 +73,15 @@ UIController.prototype.alerts = function(alertType){
 // Delete book from the UI
 
 UIController.prototype.deleteBook = function(target){
-  if(target.classList.contains('delete')){
+  // if(target.classList.contains('delete')){
 
-   target.parentElement.parentElement.remove()
-  }
+  //  target.parentElement.parentElement.remove()
+  // }
+
+  target.addEventListener('click', (e)=>{
+    e.target.parentElement.parentElement.remove()
+    this.alerts('delete')
+  })
 }
 
 
